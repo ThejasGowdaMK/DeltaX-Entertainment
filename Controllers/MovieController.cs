@@ -97,11 +97,11 @@ namespace WebApplication17.Controllers
 
         [HttpPut]
         [Route("api/Movie/editMovie/{id}")]
-        public bool movie(int id,UI_data editmovies)
+        public bool movie(UI_data editmovies)
         {
             try
             {
-                var isMovieInDb = db.Movies.Where(x => x.MID == id).SingleOrDefault();
+                var isMovieInDb = db.Movies.Where(x => x.MID == editmovies.id).SingleOrDefault();
                 if (isMovieInDb != null)
                 {
                     Actors_Movie actors_Movie = new Actors_Movie();
