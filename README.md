@@ -53,7 +53,8 @@ REST api.
             "Yash",
             "Srinidhi"
         ],
-        "Movie_Name": "KGF"
+        "Movie_Name": "KGF",
+        "id":1
     },
     
     
@@ -65,7 +66,8 @@ REST api.
             "Priya Anand",
             "Doli"
         ],
-        "Movie_Name": "Ugram"
+        "Movie_Name": "Ugram",
+        "id":2
     },
     
     
@@ -76,7 +78,8 @@ REST api.
             "Punith",
             "Radhika"
         ],
-        "Movie_Name": "Hudugaru"
+        "Movie_Name": "Hudugaru",
+        "id":3
     },
     
     
@@ -88,7 +91,8 @@ REST api.
             "Priya Anand",
             "Doli"
         ],
-        "Movie_Name": "James"
+        "Movie_Name": "James",
+        "id":4
     },
     
     
@@ -101,7 +105,8 @@ REST api.
             "Priya Anand",
             "Doli"
         ],
-        "Movie_Name": "KGF-2"
+        "Movie_Name": "KGF-2",
+        "id":5
     }
 ]
 
@@ -119,13 +124,14 @@ REST api.
  
  
    Body - 
-   
-      
-      {
-    "Movie_Name":"Yuvaratna",
-    "Release_Date":"12/07/2020",
-    "Producer":"Kishore",
-    "Actors":["Punith","Doli"]
+ 
+ 
+       
+       {
+        "Release_Date": "2012-12-06T00:00:00",
+        "Producer": "Kishore",
+        "Actors":["Punith","Doli"]
+        "Movie_Name": "Yuvaratna"
        }
        
        
@@ -158,7 +164,7 @@ Body -
 
 
 
-3. HttpPut – “api/Movie/editMovie” 
+3. HttpPut – “api/Movie/editMovie/{id}” 
 
 
 
@@ -167,23 +173,27 @@ Body -
    
    
 
-Sample Input 1:
+Sample Input 1:“api/Movie/editMovie/1” 
 
 Body -   
 
 
            {
-    "Movie_Name":"Yuvaratna",
-    "Release_Date":"12/07/2020",
-    "Producer":"Kishore",
-    "Actors":["Punith","Priya Anand","Doli"]
-           }
+        "Release_Date": "2020-08-10T00:00:00",
+        "Producer": "Vijay",
+        "Actors": [
+            "Yash",
+            "Srinidhi"
+        ],
+        "Movie_Name": "KGF",
+        "id":1
+    }
            
 
 Output – true
 
 
-Sample Input 2:
+Sample Input 2:“api/Movie/editMovie/1000” 
 
 Body – 
 
@@ -192,7 +202,8 @@ Body –
     "Movie_Name":"XYZ",
     "Release_Date":"12/07/2020",
     "Producer":"Kishore",
-    "Actors":["Punith","Priya Anand","Doli"]
+    "Actors":["Punith","Priya Anand","Doli"],
+            "id":10000
        }
        
        
