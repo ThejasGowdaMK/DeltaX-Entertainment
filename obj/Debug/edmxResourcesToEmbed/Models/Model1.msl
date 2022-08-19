@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EntertainmentModelStoreContainer" CdmEntityContainer="EntertainmentEntities2">
+    <EntitySetMapping Name="Actors">
+      <EntityTypeMapping TypeName="EntertainmentModel.Actor">
+        <MappingFragment StoreEntitySet="Actors">
+          <ScalarProperty Name="AID" ColumnName="AID" />
+          <ScalarProperty Name="C_Name" ColumnName="_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Actors_Movie">
+      <EntityTypeMapping TypeName="EntertainmentModel.Actors_Movie">
+        <MappingFragment StoreEntitySet="Actors_Movie">
+          <ScalarProperty Name="CMID" ColumnName="CMID" />
+          <ScalarProperty Name="MID" ColumnName="MID" />
+          <ScalarProperty Name="AID" ColumnName="AID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movies">
+      <EntityTypeMapping TypeName="EntertainmentModel.Movy">
+        <MappingFragment StoreEntitySet="Movies">
+          <ScalarProperty Name="MID" ColumnName="MID" />
+          <ScalarProperty Name="Movie_Name" ColumnName="Movie_Name" />
+          <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+          <ScalarProperty Name="PID" ColumnName="PID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producers">
+      <EntityTypeMapping TypeName="EntertainmentModel.Producer">
+        <MappingFragment StoreEntitySet="Producer">
+          <ScalarProperty Name="PID" ColumnName="PID" />
+          <ScalarProperty Name="Producer_Name" ColumnName="Producer_Name" />
+          <ScalarProperty Name="Production_Company" ColumnName="Production_Company" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

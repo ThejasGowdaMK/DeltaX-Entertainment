@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EntertainmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="_Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Actors_Movie">
+          <Key>
+            <PropertyRef Name="CMID" />
+          </Key>
+          <Property Name="CMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MID" Type="int" Nullable="false" />
+          <Property Name="AID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Movie_Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Release_Date" Type="datetime" Nullable="false" />
+          <Property Name="PID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producer">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Producer_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Production_Company" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Actors_Movi__AID__59063A47">
+          <End Role="Actors" Type="Self.Actors" Multiplicity="1" />
+          <End Role="Actors_Movie" Type="Self.Actors_Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actors">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="Actors_Movie">
+              <PropertyRef Name="AID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Actors_Movi__MID__5812160E">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="Actors_Movie" Type="Self.Actors_Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Actors_Movie">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movies__PID__4E88ABD4">
+          <End Role="Producer" Type="Self.Producer" Multiplicity="1" />
+          <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producer">
+              <PropertyRef Name="PID" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="PID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntertainmentModelStoreContainer">
+          <EntitySet Name="Actors" EntityType="Self.Actors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Actors_Movie" EntityType="Self.Actors_Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movies" EntityType="Self.Movies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producer" EntityType="Self.Producer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Actors_Movi__AID__59063A47" Association="Self.FK__Actors_Movi__AID__59063A47">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="Actors_Movie" EntitySet="Actors_Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Actors_Movi__MID__5812160E" Association="Self.FK__Actors_Movi__MID__5812160E">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Actors_Movie" EntitySet="Actors_Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movies__PID__4E88ABD4" Association="Self.FK__Movies__PID__4E88ABD4">
+            <End Role="Producer" EntitySet="Producer" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EntertainmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Actors_Movie" Relationship="Self.FK__Actors_Movi__AID__59063A47" FromRole="Actors" ToRole="Actors_Movie" />
+        </EntityType>
+        <EntityType Name="Actors_Movie">
+          <Key>
+            <PropertyRef Name="CMID" />
+          </Key>
+          <Property Name="CMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MID" Type="Int32" Nullable="false" />
+          <Property Name="AID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Actor" Relationship="Self.FK__Actors_Movi__AID__59063A47" FromRole="Actors_Movie" ToRole="Actors" />
+          <NavigationProperty Name="Movy" Relationship="Self.FK__Actors_Movi__MID__5812160E" FromRole="Actors_Movie" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="Movy">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Movie_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Release_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Actors_Movie" Relationship="Self.FK__Actors_Movi__MID__5812160E" FromRole="Movies" ToRole="Actors_Movie" />
+          <NavigationProperty Name="Producer" Relationship="Self.FK__Movies__PID__4E88ABD4" FromRole="Movies" ToRole="Producer" />
+        </EntityType>
+        <EntityType Name="Producer">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Producer_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Production_Company" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Movies" Relationship="Self.FK__Movies__PID__4E88ABD4" FromRole="Producer" ToRole="Movies" />
+        </EntityType>
+        <Association Name="FK__Actors_Movi__AID__59063A47">
+          <End Role="Actors" Type="Self.Actor" Multiplicity="1" />
+          <End Role="Actors_Movie" Type="Self.Actors_Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actors">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="Actors_Movie">
+              <PropertyRef Name="AID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Actors_Movi__MID__5812160E">
+          <End Role="Movies" Type="Self.Movy" Multiplicity="1" />
+          <End Role="Actors_Movie" Type="Self.Actors_Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Actors_Movie">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movies__PID__4E88ABD4">
+          <End Role="Producer" Type="Self.Producer" Multiplicity="1" />
+          <End Role="Movies" Type="Self.Movy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producer">
+              <PropertyRef Name="PID" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="PID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntertainmentEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actors" EntityType="Self.Actor" />
+          <EntitySet Name="Actors_Movie" EntityType="Self.Actors_Movie" />
+          <EntitySet Name="Movies" EntityType="Self.Movy" />
+          <EntitySet Name="Producers" EntityType="Self.Producer" />
+          <AssociationSet Name="FK__Actors_Movi__AID__59063A47" Association="Self.FK__Actors_Movi__AID__59063A47">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="Actors_Movie" EntitySet="Actors_Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Actors_Movi__MID__5812160E" Association="Self.FK__Actors_Movi__MID__5812160E">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Actors_Movie" EntitySet="Actors_Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movies__PID__4E88ABD4" Association="Self.FK__Movies__PID__4E88ABD4">
+            <End Role="Producer" EntitySet="Producers" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EntertainmentModelStoreContainer" CdmEntityContainer="EntertainmentEntities2">
+          <EntitySetMapping Name="Actors">
+            <EntityTypeMapping TypeName="EntertainmentModel.Actor">
+              <MappingFragment StoreEntitySet="Actors">
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="C_Name" ColumnName="_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Actors_Movie">
+            <EntityTypeMapping TypeName="EntertainmentModel.Actors_Movie">
+              <MappingFragment StoreEntitySet="Actors_Movie">
+                <ScalarProperty Name="CMID" ColumnName="CMID" />
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="AID" ColumnName="AID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="EntertainmentModel.Movy">
+              <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="Movie_Name" ColumnName="Movie_Name" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producers">
+            <EntityTypeMapping TypeName="EntertainmentModel.Producer">
+              <MappingFragment StoreEntitySet="Producer">
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="Producer_Name" ColumnName="Producer_Name" />
+                <ScalarProperty Name="Production_Company" ColumnName="Production_Company" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
